@@ -1,0 +1,36 @@
+<mat-toolbar>
+  <span>Flash Recall</span>
+  <span class="toolbar-spacer"></span>
+  <app-auth></app-auth>
+</mat-toolbar>
+
+<div>
+  <mat-card *ngFor="let recallItem of recallItems | async">
+    <mat-card-subtitle>
+      {{recallItem.created.toMillis() | date}}
+    </mat-card-subtitle>
+    <mat-card-content>
+      <div>
+        <h2>{{recallItem.body}}</h2>
+      </div>
+      <mat-chip-list>
+        <mat-chip *ngFor="let tag of recallItem.tags">{{tag}}</mat-chip>
+      </mat-chip-list>
+      <!--<pre>{{recallItem | json}}</pre>-->
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-icon-button aria-label="Upvote">
+        <mat-icon>arrow_upward</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Downvote">
+        <mat-icon>arrow_downward</mat-icon>
+      </button>
+    </mat-card-actions>
+    
+  </mat-card>
+</div>
+<div class="add-wrapper">
+  <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>

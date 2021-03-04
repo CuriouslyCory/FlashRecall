@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "flash-recall": {
+      "hosting": {
+        "flash-recall": [
+          "flash-recall"
+        ]
+      }
+    }
+  }
+}

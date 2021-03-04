@@ -1,5 +1,5 @@
 [build]
-  publish = "dist/anglify"
+  publish = "dist/flash-recall"
   command = "ng build --prod"
 [[redirects]]
   from = "/*"

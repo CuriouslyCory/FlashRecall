@@ -3,11 +3,11 @@
 <mat-card-content>
     <mat-form-field appearance="standard">
         <mat-label>Standard form field</mat-label>
-        <textarea matInput placeholder="Placeholder"></textarea>
+        <textarea matInput placeholder="Placeholder" [(ngModel)]="bodyText"></textarea>
         <mat-hint>Hint</mat-hint>
     </mat-form-field>
 </mat-card-content>
 <mat-card-actions>
-    <button mat-raised-button>Save</button>
+    <button mat-raised-button (click)="saveFR()">Save</button>
 </mat-card-actions>
 </mat-card>

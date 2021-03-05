@@ -3,32 +3,33 @@
   <span class="toolbar-spacer"></span>
   <app-auth></app-auth>
 </mat-toolbar>
-
-<div>
-  <mat-card *ngFor="let recallItem of recallItems | async">
-    <mat-card-subtitle>
-      {{recallItem.created.toMillis() | date}}
-    </mat-card-subtitle>
-    <mat-card-content>
-      <div>
-        <h2>{{recallItem.body}}</h2>
-      </div>
-      <mat-chip-list>
-        <mat-chip *ngFor="let tag of recallItem.tags">{{tag}}</mat-chip>
-      </mat-chip-list>
-      <!--<pre>{{recallItem | json}}</pre>-->
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-icon-button aria-label="Upvote">
-        <mat-icon>arrow_upward</mat-icon>
-      </button>
-      <button mat-icon-button aria-label="Downvote">
-        <mat-icon>arrow_downward</mat-icon>
-      </button>
-    </mat-card-actions>
-    
-  </mat-card>
+<div *ngIf="tallies | async; let tallies; else loading">
+  <div *ngFor="let tally of tallies">
+    <mat-card *ngIf="tally.item$ | async let item;">
+      <mat-card-subtitle>
+        {{item.created.toMillis() | date}}
+      </mat-card-subtitle>
+      <mat-card-content>
+        <div>
+          <h2>{{item.body}}</h2>
+        </div>
+        <mat-chip-list>
+          <mat-chip *ngFor="let tag of item.tags">{{tag}}</mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button aria-label="Upvote" (click)="markRead(item);">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Downvote">
+          <mat-icon>remove_circle_outline</mat-icon>
+        </button>
+      </mat-card-actions>
+      
+    </mat-card>
+  </div>
 </div>
+<ng-template #loading>Loading&hellip;</ng-template>
 <div class="add-wrapper">
   <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="openDialog()">
     <mat-icon>add</mat-icon>
